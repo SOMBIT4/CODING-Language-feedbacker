@@ -24,7 +24,7 @@ export default function Feedbacklist() {
     }
     {
       feedbackitems.map((feedbackitem)=>(
-     <Feedbackitem  key = {feedbackitem.id} feedbackitem={feedbackitem}/>
+     <Feedbackitem  key = {feedbackitem} feedbackitem={feedbackitem}/>
 ))}
    
   </ol>);
