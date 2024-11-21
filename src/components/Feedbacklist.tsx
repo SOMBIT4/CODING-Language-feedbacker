@@ -1,27 +1,31 @@
-import { TriangleUpIcon } from "@radix-ui/react-icons"
+
+
+import { useEffect, useState } from "react";
+import Feedbackitem from "./Feedbackitem"
+import Spinner from "./Spinner";
 
 
 export default function Feedbacklist() {
-  return <ol className="feedback-list">
-    <li className="feedback">
-      <button>
-        <TriangleUpIcon/>
-        <span >593</span>
-      </button>
-      <div>
-        <p>B</p>
-      </div>
-      <div>
-        <p>
-          Javascript
-        </p>
-        <p>
-          Javascript is a programming language that conforms to the ECMAScript specification. JavaScript is high-level, often just-in-time compiled, and multi-paradigm. It has curly-bracket syntax, dynamic typing, prototype-based object-orientation, and first-class functions.
-        </p>
-      </div>
-      
-      <p>2021-09-01</p>
-
-    </li>
-  </ol>
+  const [feedbackitems, setFeedbackitems] = useState([]);
+  const [isloading , setisloading] = useState(false);
+  useEffect(() => {
+    setisloading(true);
+    fetch("https://jsonhost.com/json/7ae5e15209142c8a46ad74ccfee71287").then((response) => {
+        return response.json();
+    }).then((data) => {
+      setFeedbackitems(data.feedbacks);
+      setisloading(false);
+      //console.log(data);
+    })
+  }, []);
+  return (<ol className="feedback-list">
+    {
+      isloading ? <Spinner/> : null
+    }
+    {
+      feedbackitems.map((feedbackitem)=>(
+     <Feedbackitem  key = {feedbackitem.id} feedbackitem={feedbackitem}/>
+))}
+   
+  </ol>);
 }
