@@ -1,13 +1,14 @@
-import Feedbacklist from "./Feedbacklist";
+
+import Feedbacklist from "../feedback/Feedbacklist";
 import Header from "./Header";
 
 
 export default function Container() {
   return (
     <main className="container">
-      <Header/>
+      <Header />
 
-      <Feedbacklist/>
+      <Feedbacklist />
     </main>
   )
 }
